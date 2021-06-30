@@ -5,7 +5,8 @@ import Link from "next/link";
 import Modal from "../components/Modal";
 import { useState } from "react";
 import Masonry from "react-masonry-css";
-
+import { Heading } from "@chakra-ui/react";
+import styles from "../styles/Home.module.css";
 export default function Home() {
   const [modal, setModal] = useState(false);
   return (
@@ -13,7 +14,7 @@ export default function Home() {
       <Meta />
       <main>
         <section className="mx-8 md:mx-48 pt-24">
-          <h1 className="text-7xl font-rubik font-bold">Fiveable</h1>
+          <Heading as="heading">Fiveable</Heading>
           <h2 className="font-palmer text-6xl">Art Collective</h2>
           <p className="font-rubik text-xl font-light">
             For creatives and artists to make and break.
@@ -30,7 +31,7 @@ export default function Home() {
           {/** Modal */}
           {modal ? <Modal /> : null}
         </section>
-        <section className="mx-8 md:mx-24 lg:mx-44">
+        <section>
           <Masonry
             breakpointCols={{
               default: 3,
@@ -38,7 +39,7 @@ export default function Home() {
               640: 2,
               480: 1,
             }}
-            className="flex w-auto"
+            className={styles.masonry}
             columnClassName=""
           >
             <Card />
