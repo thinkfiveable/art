@@ -14,7 +14,7 @@ git clone https://github.com/ThinkFiveable/art fiveable-art
 
 ```shell
 # install dependencies
-npm install
+yarn
 # run the site locally at localhost:3000
-npm run dev
+yarn dev
 ```
