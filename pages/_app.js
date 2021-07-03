@@ -1,6 +1,9 @@
 import theme from "../lib/theme";
-import Fonts from "../lib/fonts";
 import { ChakraProvider } from "@chakra-ui/react";
+import "@fontsource/rubik";
+import "@fontsource/rubik/600.css";
+import "@fontsource/rubik/500.css";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
