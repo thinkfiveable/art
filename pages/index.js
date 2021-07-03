@@ -81,13 +81,17 @@ export default function Home() {
               onClick={onOpen}
               bg="orange"
               textColor="white"
-              _hover={{ bg: "#FED8b1" }}
+              _hover={{ bg: "orange", transform: "scale(1.06)" }}
             >
               Learn more
             </Button>
             <Link href="/">
               <a>
-                <Button bg="black" textColor="white" _hover={{ bg: "#7e7e7e" }}>
+                <Button
+                  bg="black"
+                  textColor="white"
+                  _hover={{ bg: "black", transform: "scale(1.06)" }}
+                >
                   Submit to the gallery
                 </Button>
               </a>
@@ -136,7 +140,13 @@ export default function Home() {
             <ModalFooter>
               <Link href="/">
                 <a>
-                  <Button variant="solid" bg="orange" textColor="white" mx={2}>
+                  <Button
+                    variant="solid"
+                    bg="orange"
+                    textColor="white"
+                    mx={2}
+                    _hover={{ bg: "orange" }}
+                  >
                     Submit to the gallery
                   </Button>
                 </a>
