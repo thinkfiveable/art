@@ -751,6 +751,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/rubik@^4.4.5":
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/rubik/-/rubik-4.4.5.tgz#b331e8d6370394c37eed8c2b4313e78a8a4c030a"
+  integrity sha512-a9sYAHbB1g04Vux8Wv1iKKHNM86gGWDy/YrFA0hArG1nPOrYOijzl9DfrC9rQMeah97ZQmTQpRvnUY712+MFKA==
+
 "@hapi/accept@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.2.tgz#ab7043b037e68b722f93f376afb05e85c0699523"

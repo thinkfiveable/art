@@ -2,23 +2,28 @@ import Link from "next/link";
 import { Box, Image, Text, Button } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
-export default function Card() {
+export default function Card({
+  projectThumbnail,
+  projectName,
+  studentName,
+  projectUrl,
+}) {
   return (
     <div>
-      <Box borderRadius="lg" borderWidth="1px" m={[1, 2, 4]}>
-        <Image
-          src="https://citro.tech/zoom/hyper-dino-wave.gif"
-          alt="image"
-          w="full"
-        />
-        <Box px={4} py={6}>
+      <Box borderRadius="xl" overflow="hidden" borderWidth="1px" m={[1, 2, 4]}>
+        <Image src={projectThumbnail} alt="image" w="full" />
+        <Box px={4} py={6} bg="white">
           <Text fontSize="2xl" fontWeight="bold">
-            Project name
+            {projectName}
           </Text>
-          <Text>by Student Name</Text>
-          <Button variant="solid" rightIcon={<ExternalLinkIcon />} mt={2}>
-            See more
-          </Button>
+          <Text>by {studentName}</Text>
+          <Link href={projectUrl}>
+            <a>
+              <Button variant="solid" rightIcon={<ExternalLinkIcon />} mt={2}>
+                See more
+              </Button>
+            </a>
+          </Link>
         </Box>
       </Box>
     </div>
