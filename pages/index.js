@@ -42,6 +42,7 @@ export default function Home() {
           pos="absolute"
           right="165"
           top="400"
+          display={["none", "none", "inherit"]}
         />
         <Image
           src="/scribbles-spots.svg"
@@ -159,7 +160,7 @@ export default function Home() {
         </Modal>
 
         <Tabs variant="soft-rounded" colorScheme="blackAlpha">
-          <TabList mx={14}>
+          <TabList mx={14} display="flex" flexWrap="wrap">
             <Tab fontWeight="medium">All</Tab>
             <Tab fontWeight="medium">Visual Art</Tab>
             <Tab fontWeight="medium">Writing</Tab>
@@ -366,6 +367,21 @@ export default function Home() {
           </Masonry> */}
         </section>
       </main>
+      <Box style={{ fontFamily: "Palmer Lake Print" }}>
+        <Text fontSize="4xl" textAlign="center">
+          Presented by Fiveable students.
+        </Text>
+        <Text fontSize="4xl" textAlign="center" mt="-24px">
+          This project is{" "}
+          <a
+            href="https://github.com/thinkfiveable/art"
+            style={{ color: "#F36D01", textDecoration: "underline" }}
+          >
+            open source
+          </a>
+          !
+        </Text>
+      </Box>
     </div>
   );
 }
