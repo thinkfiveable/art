@@ -27,8 +27,10 @@ import {
 } from "@chakra-ui/react";
 
 import styles from "../styles/Home.module.css";
+import fetch from "isomorphic-unfetch";
+import { orderBy } from "lodash";
 
-export default function Home() {
+export default function Home(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <div>
@@ -328,44 +330,11 @@ export default function Home() {
                 className={styles.masonry}
                 columnClassName=""
               >
-                <Card
-                  projectThumbnail="https://citro.tech/zoom/hyper-dino-wave.gif"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-                <Card
-                  projectThumbnail="https://citro.tech/zoom/hyper-dino-wave.gif"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
+                <Text>rainbows</Text>
               </Masonry>
             </TabPanel>
           </TabPanels>
         </Tabs>
-
-        <section>
-          {/* <Masonry
-            breakpointCols={{
-              default: 3,
-              1024: 3,
-              640: 2,
-              480: 1,
-            }}
-            className={styles.masonry}
-            columnClassName=""
-          >
-            <Card projectThumbnail="https://citro.tech/zoom/hyper-dino-wave.gif"
-  projectName="Hyper Dino Wave"
-  studentName="Fiveable Five"
-  projectUrl="/" />
-            <Card projectThumbnail="https://citro.tech/zoom/hyper-dino-wave.gif"
-  projectName="Hyper Dino Wave"
-  studentName="Fiveable Five"
-  projectUrl="/" />
-          </Masonry> */}
-        </section>
       </main>
       <Box style={{ fontFamily: "Palmer Lake Print" }}>
         <Text fontSize="4xl" textAlign="center">
@@ -385,3 +354,21 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps = async () => {
+  const posts = await fetch(`http://localhost:3000/api/getProjects`)
+    .then((res) => res.json())
+    .then((posts) =>
+      posts.map(({ id, fields }) => ({
+        id,
+        title: fields.projectName,
+        file: fields.attachments[0].url,
+        creator: fields.creator,
+        url: fields.projectUrl,
+        type: fields.category,
+      }))
+    )
+    .then((posts) => orderBy(posts, "title"));
+  console.log(posts);
+  return { props: { posts } };
+};
