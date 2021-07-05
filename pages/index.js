@@ -182,62 +182,16 @@ export default function Home(props) {
                 className={styles.masonry}
                 columnClassName=""
               >
-                <Card
-                  projectThumbnail="https://github.com/eilla1.png"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-
-                <Card
-                  projectThumbnail="https://citro.tech/zoom/hyper-dino-wave.gif"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-                <Card
-                  projectThumbnail=" https://llandscapes-10674.kxcdn.com/wp-content/uploads/2019/07/lighting.jpg"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-                <Card
-                  projectThumbnail="https://github.com/eilla1.png"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-
-                <Card
-                  projectThumbnail=" https://llandscapes-10674.kxcdn.com/wp-content/uploads/2019/07/lighting.jpg"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-                <Card
-                  projectThumbnail=" https://llandscapes-10674.kxcdn.com/wp-content/uploads/2019/07/lighting.jpg"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-                <Card
-                  projectThumbnail=" https://llandscapes-10674.kxcdn.com/wp-content/uploads/2019/07/lighting.jpg"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-                <Card
-                  projectThumbnail=" https://github.com/thinkfiveable.png"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-                <Card
-                  projectThumbnail=" https://github.com/thinkfiveable.png"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
+                {props.posts.map(({ file, title, creator, url, id }) => (
+                  <div key={id}>
+                    <Card
+                      projectThumbnail={file}
+                      projectName={title}
+                      studentName={creator}
+                      projectUrl={url}
+                    />
+                  </div>
+                ))}
               </Masonry>
             </TabPanel>
             <TabPanel id="visualArt">
@@ -252,18 +206,16 @@ export default function Home(props) {
                 className={styles.masonry}
                 columnClassName=""
               >
-                <Card
-                  projectThumbnail="https://citro.tech/zoom/hyper-dino-wave.gif"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-                <Card
-                  projectThumbnail="https://citro.tech/zoom/hyper-dino-wave.gif"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
+                {props.posts.map(({ file, title, creator, url, id }) => (
+                  <div key={id}>
+                    <Card
+                      projectThumbnail={file}
+                      projectName={title}
+                      studentName={creator}
+                      projectUrl={url}
+                    />
+                  </div>
+                ))}
               </Masonry>
             </TabPanel>
             <TabPanel id="writing">
@@ -278,18 +230,16 @@ export default function Home(props) {
                 className={styles.masonry}
                 columnClassName=""
               >
-                <Card
-                  projectThumbnail="https://citro.tech/zoom/hyper-dino-wave.gif"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-                <Card
-                  projectThumbnail="https://citro.tech/zoom/hyper-dino-wave.gif"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
+                {props.posts.map(({ file, title, creator, url, id }) => (
+                  <div key={id}>
+                    <Card
+                      projectThumbnail={file}
+                      projectName={title}
+                      studentName={creator}
+                      projectUrl={url}
+                    />
+                  </div>
+                ))}
               </Masonry>
             </TabPanel>
             <TabPanel id="theater">
@@ -304,18 +254,16 @@ export default function Home(props) {
                 className={styles.masonry}
                 columnClassName=""
               >
-                <Card
-                  projectThumbnail="https://citro.tech/zoom/hyper-dino-wave.gif"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
-                <Card
-                  projectThumbnail="https://citro.tech/zoom/hyper-dino-wave.gif"
-                  projectName="Hyper Dino Wave"
-                  studentName="Fiveable Five"
-                  projectUrl="/"
-                />
+                {props.posts.map(({ file, title, creator, url, id }) => (
+                  <div key={id}>
+                    <Card
+                      projectThumbnail={file}
+                      projectName={title}
+                      studentName={creator}
+                      projectUrl={url}
+                    />
+                  </div>
+                ))}
               </Masonry>
             </TabPanel>
             <TabPanel id="dance">
@@ -330,7 +278,16 @@ export default function Home(props) {
                 className={styles.masonry}
                 columnClassName=""
               >
-                <Text>rainbows</Text>
+                {props.posts.map(({ file, title, creator, url, id }) => (
+                  <div key={id}>
+                    <Card
+                      projectThumbnail={file}
+                      projectName={title}
+                      studentName={creator}
+                      projectUrl={url}
+                    />
+                  </div>
+                ))}
               </Masonry>
             </TabPanel>
           </TabPanels>
