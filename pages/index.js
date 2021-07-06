@@ -1,5 +1,4 @@
 import Card from "../components/Card";
-
 import Meta from "../components/Meta";
 import Link from "next/link";
 import Masonry from "react-masonry-css";
@@ -25,13 +24,14 @@ import {
   TabPanel,
   VStack,
 } from "@chakra-ui/react";
-
 import styles from "../styles/Home.module.css";
-import fetch from "isomorphic-unfetch";
 import { orderBy } from "lodash";
+import useSWR from "swr";
+import fetcher from "../lib/fetcher";
 
-export default function Home(props) {
+export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  let data = useSWR("/api/getProjects", fetcher).data;
   return (
     <div>
       <Meta />
@@ -182,16 +182,17 @@ export default function Home(props) {
                 className={styles.masonry}
                 columnClassName=""
               >
-                {props.posts.map(({ file, title, creator, url, id }) => (
-                  <div key={id}>
+                {data?.map(
+                  ({ attachments, projectName, creator, projectUrl, id }) => (
                     <Card
-                      projectThumbnail={file}
-                      projectName={title}
+                      key={id}
+                      projectThumbnail={attachments[0].url}
+                      projectName={projectName}
                       studentName={creator}
-                      projectUrl={url}
+                      projectUrl={projectUrl}
                     />
-                  </div>
-                ))}
+                  )
+                )}
               </Masonry>
             </TabPanel>
             <TabPanel id="visualArt">
@@ -206,7 +207,7 @@ export default function Home(props) {
                 className={styles.masonry}
                 columnClassName=""
               >
-                {props.posts.map(({ file, title, creator, url, id }) => (
+                {/* {props.posts.map(({ file, title, creator, url, id }) => (
                   <div key={id}>
                     <Card
                       projectThumbnail={file}
@@ -215,7 +216,7 @@ export default function Home(props) {
                       projectUrl={url}
                     />
                   </div>
-                ))}
+                ))} */}
               </Masonry>
             </TabPanel>
             <TabPanel id="writing">
@@ -230,7 +231,7 @@ export default function Home(props) {
                 className={styles.masonry}
                 columnClassName=""
               >
-                {props.posts.map(({ file, title, creator, url, id }) => (
+                {/* {props.posts.map(({ file, title, creator, url, id }) => (
                   <div key={id}>
                     <Card
                       projectThumbnail={file}
@@ -239,7 +240,7 @@ export default function Home(props) {
                       projectUrl={url}
                     />
                   </div>
-                ))}
+                ))} */}
               </Masonry>
             </TabPanel>
             <TabPanel id="theater">
@@ -254,7 +255,7 @@ export default function Home(props) {
                 className={styles.masonry}
                 columnClassName=""
               >
-                {props.posts.map(({ file, title, creator, url, id }) => (
+                {/* {props.posts.map(({ file, title, creator, url, id }) => (
                   <div key={id}>
                     <Card
                       projectThumbnail={file}
@@ -263,7 +264,7 @@ export default function Home(props) {
                       projectUrl={url}
                     />
                   </div>
-                ))}
+                ))} */}
               </Masonry>
             </TabPanel>
             <TabPanel id="dance">
@@ -278,7 +279,7 @@ export default function Home(props) {
                 className={styles.masonry}
                 columnClassName=""
               >
-                {props.posts.map(({ file, title, creator, url, id }) => (
+                {/* {props.posts.map(({ file, title, creator, url, id }) => (
                   <div key={id}>
                     <Card
                       projectThumbnail={file}
@@ -287,7 +288,7 @@ export default function Home(props) {
                       projectUrl={url}
                     />
                   </div>
-                ))}
+                ))} */}
               </Masonry>
             </TabPanel>
           </TabPanels>
@@ -312,20 +313,20 @@ export default function Home(props) {
   );
 }
 
-export const getServerSideProps = async () => {
-  const posts = await fetch(`http://localhost:3000/api/getProjects`)
-    .then((res) => res.json())
-    .then((posts) =>
-      posts.map(({ id, fields }) => ({
-        id,
-        title: fields.projectName,
-        file: fields.attachments[0].url,
-        creator: fields.creator,
-        url: fields.projectUrl,
-        type: fields.category,
-      }))
-    )
-    .then((posts) => orderBy(posts, "title"));
-  console.log(posts);
-  return { props: { posts } };
-};
+// export const getServerSideProps = async () => {
+//   const posts = await fetch(`http://localhost:3000/api/getProjects`)
+//     .then((res) => res.json())
+//     .then((posts) =>
+//       posts.map(({ id, fields }) => ({
+//         id,
+//         title: fields.projectName,
+//         file: fields.attachments[0].url,
+//         creator: fields.creator,
+//         url: fields.projectUrl,
+//         type: fields.category,
+//       }))
+//     )
+//     .then((posts) => orderBy(posts, "title"));
+//   console.log(posts);
+//   return { props: { posts } };
+// };
