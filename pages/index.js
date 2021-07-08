@@ -25,20 +25,23 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import styles from "../styles/Home.module.css";
-import { orderBy } from "lodash";
 import useSWR from "swr";
 import fetcher from "../lib/fetcher";
+import { useEffect } from "react";
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   let data = useSWR("/api/getProjects", fetcher).data;
+  useEffect(() => {
+    console.log(data);
+  });
   return (
     <div>
       <Meta />
       <main>
         <Image
           src="/scribbles-dots.svg"
-          alt="scribble doodles"
+          alt="Cluster of circular scribbles"
           width={150}
           height={150}
           pos="absolute"
@@ -48,7 +51,7 @@ export default function Home() {
         />
         <Image
           src="/scribbles-spots.svg"
-          alt="scribble doodles"
+          alt="Thick paintbrush pattern"
           width={150}
           height={150}
           pos="absolute"
@@ -57,7 +60,7 @@ export default function Home() {
         />
         <Image
           src="/scribbles-loop.svg"
-          alt="scribble doodles"
+          alt="Solenoid-type doodle"
           width={150}
           height={150}
           pos="absolute"
@@ -88,7 +91,7 @@ export default function Home() {
             >
               Learn more
             </Button>
-            <Link href="/">
+            <Link href="https://airtable.com/shr6KCdlbJFN2SvZF">
               <a>
                 <Button
                   bg="black"
@@ -115,19 +118,19 @@ export default function Home() {
                 </Text>
                 <Text>
                   Would you like to create something special for the Fiveable
-                  Community? We present to you Fiveable&apos;s Scenic Showcase
-                  ✨ , a space for you to showcase your brilliant talent!
+                  Community? We present to you Fiveable&apos;s Art Showcase ✨ ,
+                  a space for you to showcase your brilliant talent!
                 </Text>
                 <Text>
                   To make things interesting, we want you to follow the Rule of
                   Fives, an ideology that embodies a place for everything and
-                  everything in its place 🤔 . This month&apos;s theme will be
-                  Pop :boom: . Using bright, flamboyant colors 🌈 , create a
-                  piece around a remarkable object, activity, or event.
-                  We&apos;d love to get submissions in every artistic category:
-                  visual arts, writing, theater, public speaking, and dance!
-                  You&apos;re welcome to submit videos, paintings, graphics, and
-                  all other mediums through which you can represent the theme!
+                  everything in its place 🤔. This week&apos;s theme will be Pop
+                  💥. Using bright, flamboyant colors 🌈 , create a piece around
+                  a remarkable object, activity, or event. We&apos;d love to get
+                  submissions in every artistic category: visual arts, writing,
+                  theater, and dance! You&apos;re welcome to submit videos,
+                  paintings, graphics, and all other mediums through which you
+                  can represent the theme!
                 </Text>{" "}
                 <Text>
                   Submit your work to the Airtable form linked below to get it
@@ -141,7 +144,7 @@ export default function Home() {
             </ModalBody>
 
             <ModalFooter>
-              <Link href="/">
+              <Link href="https://airtable.com/shr6KCdlbJFN2SvZF">
                 <a>
                   <Button
                     variant="solid"
@@ -164,7 +167,7 @@ export default function Home() {
         <Tabs variant="soft-rounded" colorScheme="blackAlpha">
           <TabList mx={14} display="flex" flexWrap="wrap">
             <Tab fontWeight="medium">All</Tab>
-            <Tab fontWeight="medium">Visual Art</Tab>
+            <Tab fontWeight="medium">Visual Arts</Tab>
             <Tab fontWeight="medium">Writing</Tab>
             <Tab fontWeight="medium">Theater</Tab>
             <Tab fontWeight="medium">Dance</Tab>
@@ -182,21 +185,19 @@ export default function Home() {
                 className={styles.masonry}
                 columnClassName=""
               >
-                {data?.map(
-                  ({ attachments, projectName, creator, projectUrl, id }) => (
-                    <Card
-                      key={id}
-                      projectThumbnail={attachments[0].url}
-                      projectName={projectName}
-                      studentName={creator}
-                      projectUrl={projectUrl}
-                    />
-                  )
-                )}
+                {data?.map((project) => (
+                  <Card
+                    key={project.id}
+                    projectThumbnail={project.attachments[0].url}
+                    projectName={project.projectName}
+                    studentName={project.creator}
+                    projectUrl={project.projectUrl}
+                  />
+                ))}
               </Masonry>
             </TabPanel>
-            <TabPanel id="visualArt">
-              <Heading mx={14}>Visual Art</Heading>
+            <TabPanel id="visualArts">
+              <Heading mx={14}>Visual Arts</Heading>
               <Masonry
                 breakpointCols={{
                   default: 3,
@@ -207,16 +208,19 @@ export default function Home() {
                 className={styles.masonry}
                 columnClassName=""
               >
-                {/* {props.posts.map(({ file, title, creator, url, id }) => (
-                  <div key={id}>
+                {data
+                  ?.filter((project) =>
+                    project.category?.includes("Visual Arts")
+                  )
+                  .map((project) => (
                     <Card
-                      projectThumbnail={file}
-                      projectName={title}
-                      studentName={creator}
-                      projectUrl={url}
+                      key={project.id}
+                      projectThumbnail={project.attachments[0].url}
+                      projectName={project.projectName}
+                      studentName={project.creator}
+                      projectUrl={project.projectUrl}
                     />
-                  </div>
-                ))} */}
+                  ))}
               </Masonry>
             </TabPanel>
             <TabPanel id="writing">
@@ -231,16 +235,17 @@ export default function Home() {
                 className={styles.masonry}
                 columnClassName=""
               >
-                {/* {props.posts.map(({ file, title, creator, url, id }) => (
-                  <div key={id}>
+                {data
+                  ?.filter((project) => project.category?.includes("Writing"))
+                  .map((project) => (
                     <Card
-                      projectThumbnail={file}
-                      projectName={title}
-                      studentName={creator}
-                      projectUrl={url}
+                      key={project.id}
+                      projectThumbnail={project.attachments[0].url}
+                      projectName={project.projectName}
+                      studentName={project.creator}
+                      projectUrl={project.projectUrl}
                     />
-                  </div>
-                ))} */}
+                  ))}
               </Masonry>
             </TabPanel>
             <TabPanel id="theater">
@@ -255,16 +260,17 @@ export default function Home() {
                 className={styles.masonry}
                 columnClassName=""
               >
-                {/* {props.posts.map(({ file, title, creator, url, id }) => (
-                  <div key={id}>
+                {data
+                  ?.filter((project) => project.category?.includes("Theater"))
+                  .map((project) => (
                     <Card
-                      projectThumbnail={file}
-                      projectName={title}
-                      studentName={creator}
-                      projectUrl={url}
+                      key={project.id}
+                      projectThumbnail={project.attachments[0].url}
+                      projectName={project.projectName}
+                      studentName={project.creator}
+                      projectUrl={project.projectUrl}
                     />
-                  </div>
-                ))} */}
+                  ))}
               </Masonry>
             </TabPanel>
             <TabPanel id="dance">
@@ -279,54 +285,34 @@ export default function Home() {
                 className={styles.masonry}
                 columnClassName=""
               >
-                {/* {props.posts.map(({ file, title, creator, url, id }) => (
-                  <div key={id}>
+                {data
+                  ?.filter((project) => project.category?.includes("Dance"))
+                  .map((project) => (
                     <Card
-                      projectThumbnail={file}
-                      projectName={title}
-                      studentName={creator}
-                      projectUrl={url}
+                      key={project.id}
+                      projectThumbnail={project.attachments[0].url}
+                      projectName={project.projectName}
+                      studentName={project.creator}
+                      projectUrl={project.projectUrl}
                     />
-                  </div>
-                ))} */}
+                  ))}
               </Masonry>
             </TabPanel>
           </TabPanels>
         </Tabs>
       </main>
       <Box style={{ fontFamily: "Palmer Lake Print" }}>
-        <Text fontSize="4xl" textAlign="center">
-          Presented by Fiveable students.
-        </Text>
         <Text fontSize="4xl" textAlign="center" mt="-24px">
-          This project is{" "}
+          - This project is{" "}
           <a
             href="https://github.com/thinkfiveable/art"
-            style={{ color: "#F36D01", textDecoration: "underline" }}
+            className={styles.link}
           >
             open source
           </a>
-          !
+          ! -
         </Text>
       </Box>
     </div>
   );
 }
-
-// export const getServerSideProps = async () => {
-//   const posts = await fetch(`http://localhost:3000/api/getProjects`)
-//     .then((res) => res.json())
-//     .then((posts) =>
-//       posts.map(({ id, fields }) => ({
-//         id,
-//         title: fields.projectName,
-//         file: fields.attachments[0].url,
-//         creator: fields.creator,
-//         url: fields.projectUrl,
-//         type: fields.category,
-//       }))
-//     )
-//     .then((posts) => orderBy(posts, "title"));
-//   console.log(posts);
-//   return { props: { posts } };
-// };

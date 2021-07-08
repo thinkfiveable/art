@@ -4,3 +4,13 @@
   margin-right: 2rem;
   margin-left: 2rem;
 }
+
+.link {
+  color: #f36d01;
+  text-decoration: underline;
+}
+
+.link:hover {
+  text-decoration-style: wavy;
+  color: #f8a765;
+}
