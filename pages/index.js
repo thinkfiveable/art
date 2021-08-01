@@ -124,13 +124,12 @@ export default function Home() {
                 <Text>
                   To make things interesting, we want you to follow the Rule of
                   Fives, an ideology that embodies a place for everything and
-                  everything in its place 🤔. This week&apos;s theme will be Pop
-                  💥. Using bright, flamboyant colors 🌈 , create a piece around
-                  a remarkable object, activity, or event. We&apos;d love to get
-                  submissions in every artistic category: visual arts, writing,
-                  theater, and dance! You&apos;re welcome to submit videos,
-                  paintings, graphics, and all other mediums through which you
-                  can represent the theme!
+                  everything in its place 🤔. Using bright, flamboyant colors 🌈
+                  , create a piece around a remarkable object, activity, or
+                  event. We&apos;d love to get submissions in every artistic
+                  category: visual arts, writing, theater, and music!
+                  You&apos;re welcome to submit videos, paintings, graphics, and
+                  all other mediums through which you can represent the theme!
                 </Text>{" "}
                 <Text>
                   Submit your work to the Airtable form linked below to get it
@@ -170,7 +169,7 @@ export default function Home() {
             <Tab fontWeight="medium">Visual Arts</Tab>
             <Tab fontWeight="medium">Writing</Tab>
             <Tab fontWeight="medium">Theater</Tab>
-            <Tab fontWeight="medium">Dance</Tab>
+            <Tab fontWeight="medium">Music</Tab>
           </TabList>
           <TabPanels>
             <TabPanel id="all">
@@ -273,8 +272,8 @@ export default function Home() {
                   ))}
               </Masonry>
             </TabPanel>
-            <TabPanel id="dance">
-              <Heading mx={14}>Dance</Heading>
+            <TabPanel id="music">
+              <Heading mx={14}>Music</Heading>
               <Masonry
                 breakpointCols={{
                   default: 3,
@@ -286,7 +285,7 @@ export default function Home() {
                 columnClassName=""
               >
                 {data
-                  ?.filter((project) => project.category?.includes("Dance"))
+                  ?.filter((project) => project.category?.includes("Music"))
                   .map((project) => (
                     <Card
                       key={project.id}
