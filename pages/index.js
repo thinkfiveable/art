@@ -170,6 +170,7 @@ export default function Home() {
             <Tab fontWeight="medium">Writing</Tab>
             <Tab fontWeight="medium">Theater</Tab>
             <Tab fontWeight="medium">Music</Tab>
+            <Tab fontWeight="medium">Anthology</Tab>
           </TabList>
           <TabPanels>
             <TabPanel id="all">
@@ -295,6 +296,35 @@ export default function Home() {
                       projectUrl={project.projectUrl}
                     />
                   ))}
+              </Masonry>
+            </TabPanel>
+            <TabPanel id="anthology">
+              <Heading mx={14}>Creative Writing: Anthology</Heading>
+              <Text mx={14} my={8}>
+                A seasonal anthology, presented by the Creative Writing Club
+                coming soon!
+              </Text>
+              <Masonry
+                breakpointCols={{
+                  default: 3,
+                  1024: 3,
+                  640: 2,
+                  480: 1,
+                }}
+                className={styles.masonry}
+                columnClassName=""
+              >
+                {/* {data
+                  ?.filter((project) => project.category?.includes("Music"))
+                  .map((project) => (
+                    <Card
+                      key={project.id}
+                      projectThumbnail={project.attachments[0].url}
+                      projectName={project.projectName}
+                      studentName={project.creator}
+                      projectUrl={project.projectUrl}
+                    />
+                  ))} */}
               </Masonry>
             </TabPanel>
           </TabPanels>
